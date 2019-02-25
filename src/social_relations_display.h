@@ -49,10 +49,10 @@ namespace spencer_tracking_rviz_plugin
         SocialRelationsDisplay() {};
         virtual ~SocialRelationsDisplay();
 
-        // Overrides of protected virtual functions from Display.  As much
+        // Overrides of protected virtual boost::functions from Display.  As much
         // as possible, when Displays are not enabled, they should not be
         // subscribed to incoming data and should not show anything in the
-        // 3D view.  These functions are where these connections are made
+        // 3D view.  These boost::functions are where these connections are made
         // and broken.
 
         // Called after the constructors have run
@@ -71,19 +71,19 @@ namespace spencer_tracking_rviz_plugin
         struct RelationVisual {
             std::string type;
             double relationStrength;
-            shared_ptr<rviz::BillboardLine> relationLine;
-            shared_ptr<TextNode> relationText;
+            boost::shared_ptr<rviz::BillboardLine> relationLine;
+            boost::shared_ptr<TextNode> relationText;
             track_id trackId1, trackId2; // required to hide certain tracks
         };
 
         // Functions to handle an incoming ROS message.
         void processMessage(const spencer_social_relation_msgs::SocialRelations::ConstPtr& msg);
         
-        // Helper functions
-        void updateRelationVisualStyles(shared_ptr<RelationVisual>& relationVisual);
+        // Helper boost::functions
+        void updateRelationVisualStyles(boost::shared_ptr<RelationVisual>& relationVisual);
         
         // Scene node for group affiliation history visualization
-        shared_ptr<Ogre::SceneNode> m_socialRelationsSceneNode;
+        boost::shared_ptr<Ogre::SceneNode> m_socialRelationsSceneNode;
 
         // User-editable property variables.
         rviz::StringProperty* m_relation_type_filter_property;
@@ -96,7 +96,7 @@ namespace spencer_tracking_rviz_plugin
         rviz::ColorProperty* m_negative_person_relations_color;
 
         // State variables
-        vector<shared_ptr<RelationVisual> > m_relationVisuals;
+        vector<boost::shared_ptr<RelationVisual> > m_relationVisuals;
         TrackedPersonsCache m_trackedPersonsCache;
 
     private Q_SLOTS:

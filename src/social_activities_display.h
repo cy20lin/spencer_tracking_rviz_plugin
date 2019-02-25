@@ -59,10 +59,10 @@ namespace spencer_tracking_rviz_plugin
         SocialActivitiesDisplay() {};
         virtual ~SocialActivitiesDisplay();
 
-        // Overrides of protected virtual functions from Display.  As much
+        // Overrides of protected virtual boost::functions from Display.  As much
         // as possible, when Displays are not enabled, they should not be
         // subscribed to incoming data and should not show anything in the
-        // 3D view.  These functions are where these connections are made
+        // 3D view.  These boost::functions are where these connections are made
         // and broken.
 
         // Called after the constructors have run
@@ -82,9 +82,9 @@ namespace spencer_tracking_rviz_plugin
 
     private:
         struct SocialActivityVisual {
-            vector<shared_ptr<rviz::Shape> > socialActivityAssignmentCircles;
-            vector<shared_ptr<rviz::BillboardLine> > connectionLines;
-            vector< shared_ptr<TextNode> > typeTexts;
+            vector<boost::shared_ptr<rviz::Shape> > socialActivityAssignmentCircles;
+            vector<boost::shared_ptr<rviz::BillboardLine> > connectionLines;
+            vector< boost::shared_ptr<TextNode> > typeTexts;
             vector<track_id> trackIds;
             activity_type activityType;
             float confidence;
@@ -96,13 +96,13 @@ namespace spencer_tracking_rviz_plugin
         // Functions to handle an incoming ROS message.
         void processMessage(const spencer_social_relation_msgs::SocialActivities::ConstPtr& msg);
 
-        // Helper functions
-        void updateSocialActivityVisualStyles(shared_ptr<SocialActivityVisual>& groupVisual);
+        // Helper boost::functions
+        void updateSocialActivityVisualStyles(boost::shared_ptr<SocialActivityVisual>& groupVisual);
         bool isActivityTypeHidden(activity_type activityType);
         Ogre::ColourValue getActivityColor(activity_type activityType, float confidence);
 
         // Scene nodes
-        shared_ptr<Ogre::SceneNode> m_socialActivitiesSceneNode;
+        boost::shared_ptr<Ogre::SceneNode> m_socialActivitiesSceneNode;
 
         // User-editable property variables.
         rviz::StringProperty* m_excluded_activity_types_property;
@@ -141,12 +141,12 @@ namespace spencer_tracking_rviz_plugin
 
         // State variables
         struct PersonVisualContainer {
-            shared_ptr<PersonVisual> personVisual;
-            shared_ptr<Ogre::SceneNode> sceneNode;
+            boost::shared_ptr<PersonVisual> personVisual;
+            boost::shared_ptr<Ogre::SceneNode> sceneNode;
             track_id trackId;
         };
 
-        vector<shared_ptr<SocialActivityVisual> > m_socialActivityVisuals;
+        vector<boost::shared_ptr<SocialActivityVisual> > m_socialActivityVisuals;
         map<track_id, PersonVisualContainer > m_personVisualMap; // to keep person visuals alive across multiple frames, for walking animation
 
         map<track_id, ActivityWithConfidence> m_highestConfidenceActivityPerTrack; // only highest-confidence activity per person

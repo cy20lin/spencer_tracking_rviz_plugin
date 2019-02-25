@@ -43,12 +43,12 @@ namespace spencer_tracking_rviz_plugin
     /// The visual of a tracked person.
     struct DetectedPersonVisual
     {
-        shared_ptr<Ogre::SceneNode> sceneNode;
+        boost::shared_ptr<Ogre::SceneNode> sceneNode;
 
-        shared_ptr<PersonVisual> personVisual;
-        shared_ptr<TextNode> detectionIdText, confidenceText, modalityText;
-        shared_ptr<rviz::Arrow> orientationArrow;
-        shared_ptr<CovarianceVisual> covarianceVisual;
+        boost::shared_ptr<PersonVisual> personVisual;
+        boost::shared_ptr<TextNode> detectionIdText, confidenceText, modalityText;
+        boost::shared_ptr<rviz::Arrow> orientationArrow;
+        boost::shared_ptr<CovarianceVisual> covarianceVisual;
 
         float confidence;
         bool hasValidOrientation;
@@ -66,10 +66,10 @@ namespace spencer_tracking_rviz_plugin
         DetectedPersonsDisplay() {};
         virtual ~DetectedPersonsDisplay();
 
-        // Overrides of protected virtual functions from Display.  As much
+        // Overrides of protected virtual boost::functions from Display.  As much
         // as possible, when Displays are not enabled, they should not be
         // subscribed to incoming data and should not show anything in the
-        // 3D view.  These functions are where these connections are made
+        // 3D view.  These boost::functions are where these connections are made
         // and broken.
         
         virtual void onInitialize();
@@ -94,7 +94,7 @@ namespace spencer_tracking_rviz_plugin
         void processMessage(const spencer_tracking_msgs::DetectedPersons::ConstPtr& msg);
        
         // All currently active tracks, with unique track ID as map key
-        vector<shared_ptr<DetectedPersonVisual> > m_previousDetections;
+        vector<boost::shared_ptr<DetectedPersonVisual> > m_previousDetections;
 
         // Properties
         rviz::BoolProperty* m_render_covariances_property;

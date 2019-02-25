@@ -48,12 +48,12 @@ namespace spencer_tracking_rviz_plugin
     struct GroupAffiliationHistoryEntry
     {
         group_id groupId;
-        shared_ptr<rviz::Shape> shape;
+        boost::shared_ptr<rviz::Shape> shape;
         bool wasOccluded, wasSinglePersonGroup;
     };
 
     /// History of a tracked person.
-    typedef circular_buffer<shared_ptr<GroupAffiliationHistoryEntry> > GroupAffiliationHistory;
+    typedef circular_buffer<boost::shared_ptr<GroupAffiliationHistoryEntry> > GroupAffiliationHistory;
 
     /// The display which can be added in RViz to display tracked groups.
     class TrackedGroupsDisplay: public PersonDisplayCommon<spencer_tracking_msgs::TrackedGroups>
@@ -65,10 +65,10 @@ namespace spencer_tracking_rviz_plugin
         TrackedGroupsDisplay() {};
         virtual ~TrackedGroupsDisplay();
 
-        // Overrides of protected virtual functions from Display.  As much
+        // Overrides of protected virtual boost::functions from Display.  As much
         // as possible, when Displays are not enabled, they should not be
         // subscribed to incoming data and should not show anything in the
-        // 3D view.  These functions are where these connections are made
+        // 3D view.  These boost::functions are where these connections are made
         // and broken.
 
         // Called after the constructors have run
@@ -88,11 +88,11 @@ namespace spencer_tracking_rviz_plugin
 
     private:
         struct GroupVisual {
-            vector<shared_ptr<rviz::Shape> > groupAssignmentCircles;
-            vector<shared_ptr<PersonVisual> > personVisuals;
-            vector<shared_ptr<Ogre::SceneNode> > personVisualSceneNodes;
-            vector<shared_ptr<rviz::BillboardLine> > connectionLines;
-            shared_ptr<TextNode> idText;
+            vector<boost::shared_ptr<rviz::Shape> > groupAssignmentCircles;
+            vector<boost::shared_ptr<PersonVisual> > personVisuals;
+            vector<boost::shared_ptr<Ogre::SceneNode> > personVisualSceneNodes;
+            vector<boost::shared_ptr<rviz::BillboardLine> > connectionLines;
+            boost::shared_ptr<TextNode> idText;
             group_id groupId;
             geometry_msgs::Point groupCenter;
             size_t personCount;
@@ -101,13 +101,13 @@ namespace spencer_tracking_rviz_plugin
         // Functions to handle an incoming ROS message.
         void processMessage(const spencer_tracking_msgs::TrackedGroups::ConstPtr& msg);
        
-        // Helper functions
-        void updateGroupVisualStyles(shared_ptr<GroupVisual>& groupVisual);
+        // Helper boost::functions
+        void updateGroupVisualStyles(boost::shared_ptr<GroupVisual>& groupVisual);
         void updateHistoryStyles();
         bool isGroupHidden(group_id groupId);
 
         // Scene node for group affiliation history visualization
-        shared_ptr<Ogre::SceneNode> m_groupAffiliationHistorySceneNode, m_groupsSceneNode;
+        boost::shared_ptr<Ogre::SceneNode> m_groupAffiliationHistorySceneNode, m_groupsSceneNode;
 
         std::string m_realFixedFrame;
 
@@ -127,7 +127,7 @@ namespace spencer_tracking_rviz_plugin
         rviz::FloatProperty* m_group_id_offset; // z offset of the group ID text
 
         // State variables
-        vector<shared_ptr<GroupVisual> > m_groupVisuals;
+        vector<boost::shared_ptr<GroupVisual> > m_groupVisuals;
         
         map<track_id, group_id> m_groupAffiliations;
         GroupAffiliationHistory m_groupAffiliationHistory;

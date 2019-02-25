@@ -53,10 +53,10 @@ namespace spencer_tracking_rviz_plugin
         HumanAttributesDisplay() {};
         virtual ~HumanAttributesDisplay();
 
-        // Overrides of protected virtual functions from Display.  As much
+        // Overrides of protected virtual boost::functions from Display.  As much
         // as possible, when Displays are not enabled, they should not be
         // subscribed to incoming data and should not show anything in the
-        // 3D view.  These functions are where these connections are made
+        // 3D view.  These boost::functions are where these connections are made
         // and broken.
 
         // Called after the constructors have run
@@ -76,19 +76,19 @@ namespace spencer_tracking_rviz_plugin
 
     private:
         struct HumanAttributeVisual {
-            shared_ptr<Ogre::SceneNode> sceneNode;
-            shared_ptr<MeshNode> genderMesh;
+            boost::shared_ptr<Ogre::SceneNode> sceneNode;
+            boost::shared_ptr<MeshNode> genderMesh;
             unsigned int trackId;
-            shared_ptr<TextNode> ageGroupText;
-            shared_ptr<TextNode> personHeightText;
+            boost::shared_ptr<TextNode> ageGroupText;
+            boost::shared_ptr<TextNode> personHeightText;
         };
 
         // Functions to handle an incoming ROS message.
         void processMessage(const spencer_human_attribute_msgs::HumanAttributes::ConstPtr& msg);
        
-        // Helper functions
-        void updateVisualStyles(shared_ptr<HumanAttributeVisual>& humanAttributeVisual);
-        shared_ptr<HumanAttributeVisual> createVisualIfNotExists(track_id trackId);
+        // Helper boost::functions
+        void updateVisualStyles(boost::shared_ptr<HumanAttributeVisual>& humanAttributeVisual);
+        boost::shared_ptr<HumanAttributeVisual> createVisualIfNotExists(track_id trackId);
 
         // User-editable property variables.
         rviz::BoolProperty* m_render_gender_property;
@@ -98,7 +98,7 @@ namespace spencer_tracking_rviz_plugin
         rviz::FloatProperty* m_occlusion_alpha_property;        
 
         // State variables
-        map<track_id, shared_ptr<HumanAttributeVisual> > m_humanAttributeVisuals;
+        map<track_id, boost::shared_ptr<HumanAttributeVisual> > m_humanAttributeVisuals;
 
         Ogre::Matrix4 m_frameTransform;
         TrackedPersonsCache m_trackedPersonsCache;
